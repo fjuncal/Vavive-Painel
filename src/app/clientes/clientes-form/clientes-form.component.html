@@ -1,0 +1,99 @@
+<h1 class="mt-4">Formulário de Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+  <form #clienteForm="ngForm" (ngSubmit)="enviar()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success === true">
+          Cliente salvo com sucesso!
+        </div>
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{ erro }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Nome: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Sobrenome: *</label>
+          <input type="text" [(ngModel)]="cliente.sobrenome" name="sobrenome" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>E-Mail: *</label>
+          <input type="email" class="form-control" [(ngModel)]="cliente.email" name="email">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>CPF *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>CEP: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Bairro: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.bairro" name="bairro">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Endereço: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <label>Ponto de Referencia: </label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.pontoDeReferencia" name="pontoDeReferencia">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Telefone: *</label>
+          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone" name="telefone">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <label>Observação: </label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.observacao" name="observacao">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Origem do Cliente: </label>
+          <input type="text" class="form-control"[(ngModel)]="cliente.origemCliente" name="origemCliente">
+        </div>
+      </div>
+      <div class="col-md-1" *ngIf="cliente.dataCadastro">
+        <div class="form-group">
+          <label>Data Cadastro: </label>
+          <input type="text" class="form-control" disabled="true" [ngModel]="cliente.dataCadastro" name="dataCadastro" >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-success" >
+          <i class="fa fa-save"></i> Salvar
+        </button>
+      </div>
+    </div>
+  </form>
