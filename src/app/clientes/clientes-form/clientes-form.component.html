@@ -14,19 +14,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="form-group">
-          <label>Nome: *</label>
+          <label>Nome Completo: *</label>
           <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome">
         </div>
       </div>
       <div class="col-md-4">
-        <div class="form-group">
-          <label>Sobrenome: *</label>
-          <input type="text" [(ngModel)]="cliente.sobrenome" name="sobrenome" class="form-control">
-        </div>
-      </div>
-      <div class="col-md-3">
         <div class="form-group">
           <label>E-Mail: *</label>
           <input type="email" class="form-control" [(ngModel)]="cliente.email" name="email">
@@ -38,14 +32,14 @@
           <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf">
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-1">
+      <div class="col-md-2">
         <div class="form-group">
           <label>CEP: *</label>
           <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep">
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-2">
         <div class="form-group">
           <label>Bairro: *</label>
