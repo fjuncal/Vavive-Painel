@@ -1,0 +1,87 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+      {{ mensagemSucesso }}
+    </div>
+    <div class="alert alert-danger" role="alert" *ngif="mensagemErro">
+      {{ mensagemErro }}
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-warning" (click) = "novoCadastro()">
+        <i class="fa fa-plus"></i> Novo</button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-Mail</th>
+            <th>Cpf</th>
+            <th>Cep</th>
+            <th>Bairro</th>
+            <th>Endereço</th>
+            <th>PontoReferencia</th>
+            <th>Telefone</th>
+            <th>Observação</th>
+            <th>OrigemCliente</th>
+            <th>DataCadastro</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td> {{ cliente.nome }}</td>
+            <td> {{ cliente.email }}</td>
+            <td> {{ cliente.cpf }}</td>
+            <td> {{ cliente.cep }}</td>
+            <td> {{ cliente.bairro }}</td>
+            <td> {{ cliente.endereco }}</td>
+            <td> {{ cliente.pontoDeReferencia }}</td>
+            <td> {{ cliente.telefone }}</td>
+            <td> {{ cliente.observacao }}</td>
+            <td> {{ cliente.origemCliente }}</td>
+            <td> {{ cliente.dataCadastro }}</td>
+            <td>
+              <button class="btn btn-primary" routerLink="/clientes-cadastro/{{ cliente.id }}">
+                <i class="fa fa-edit"></i>
+              </button>
+
+              <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelecao" (click)="confirmarDelecao(cliente)">
+                <i class="fa fa-trash"></i>
+              </button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modalDelecao" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Confirmação</h4>
+          </div>
+          <div class="modal-body" *ngIf="clienteSelecionado">
+            Confirma a deleção do(a) Cliente {{clienteSelecionado.nome }}?
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" (click)="deletarCliente()" data-dismiss="modal">Confirmar</button>
+            <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
