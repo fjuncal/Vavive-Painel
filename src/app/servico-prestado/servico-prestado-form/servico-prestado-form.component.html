@@ -5,6 +5,16 @@
 
   <form #form = "ngForm" (submit) = "onSubmit()">
     <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success === true">
+          Serviço salvo com sucesso!
+        </div>
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{ erro }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-4">
         <div class="form-group">
           <label>Cliente: </label>
@@ -34,7 +44,7 @@
     <div class="row">
       <div class="col-md-2">
         <div class="form-group">
-          <label>Data da Atividade: *</label>
+          <label>Data do Serviço: *</label>
           <input class="form-control" [(ngModel)] = "servicoPrestado.dataAtividade" type="text" name="dataAtividade" id="inputDataAtividade">
         </div>
       </div>
