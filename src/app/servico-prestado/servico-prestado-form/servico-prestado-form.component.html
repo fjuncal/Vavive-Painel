@@ -1,0 +1,97 @@
+<h1 class="mt-4">Serviço</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Novo</li>
+</ol>
+
+  <form #form = "ngForm" (submit) = "onSubmit()">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Cliente: </label>
+          <select class="form-control" [(ngModel)]="servicoPrestado.idCliente" [ngModelOptions]="{standalone: true}">
+            <option value="">Selecione...</option>
+            <option *ngFor="let cliente of clientes" [ngValue] = "cliente.id">
+              {{ cliente.nome }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Nome do Serviço: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.nome" type="text" name="nome" id="inputNome">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Plano:</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.plano" type="text" name="plano" id="inputPlano">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Data da Atividade: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.dataAtividade" type="text" name="dataAtividade" id="inputDataAtividade">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Duracao: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.duracao" type="text" name="duracao" id="inputDuracao">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Hora: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.hora" type="time" name="hora" id="inputHora">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Nota: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.nota" type="number" name="nota" id="inputNota">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Responsável: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.responsavel" type="text" name="responsavel" id="inputResponsavel">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+          <label>Observação:</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.observacao" type="text" name="observacao" id="inputObservacao">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Valor: *</label>
+          <input class="form-control" [(ngModel)] = "servicoPrestado.valor" type="number" name="valor" id="inputValor">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1" *ngIf="servicoPrestado.dataCadastro">
+        <div class="form-group">
+          <label>Data Cadastro: </label>
+          <input type="text" class="form-control" disabled="true" [ngModel]="servicoPrestado.dataCadastro" name="dataCadastro" >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <button class="btn btn-success" type="submit">
+          <i class="fa fa-save"></i>
+          Salvar</button>
+      </div>
+    </div>
+  </form>
