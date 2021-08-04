@@ -1,3 +1,5 @@
+import { ServicoPrestadoService } from './../../services/servico-prestado.service';
+import { ServicoPrestadoBusca } from './servicoPrestadoBusca';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServicoPrestadoListaComponent implements OnInit {
 
-  constructor() { }
+  nome: string;
+  mes: number;
+  meses: number[];
+  lista: ServicoPrestadoBusca[];
+  message: string;
+
+  constructor(private servicoPrestadoService: ServicoPrestadoService) {
+    this.meses =[1,2,3,4,5,6,7,8,9,10,11,12];
+  }
 
   ngOnInit(): void {
+  }
+
+  consultar(){
+    this.servicoPrestadoService.buscar(this.nome, this.mes)
+                    .subscribe(response => {
+                      this.lista = response;
+                      if(this.lista.length <= 0){
+                        this.message = 'Nenhum registro encontrado';
+                      } else{
+                        this.message = null;
+                      }
+                    });
   }
 
 }
