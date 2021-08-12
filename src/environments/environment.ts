@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiURLBase: 'http://localhost:8080/vavive/api'
+  apiURLBase: 'http://localhost:8080/vavive/api',
+  clientId: 'angular-vavive',
+  clientSecret: 'vavive',
+  obterTokenUrl: '/oauth/token'
 };
 
 /*

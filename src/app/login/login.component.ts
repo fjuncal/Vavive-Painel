@@ -19,13 +19,24 @@ export class LoginComponent {
   constructor(private router: Router, private autenticacaoService: AutenticacaoService) { }
 
   onSubmit(){
-    this.router.navigate(['/home'])
+    this.autenticacaoService.tentarLogar(this.usuario, this.senha)
+                            .subscribe(response => {
+                              console.log(response);
+                              this.router.navigate(['/home'])
+                            }, errorResponse => {
+                              this.errors = ['Usuário e/ou senha incorreto(s)']
+                              this.mensagemSucesso = '';
+                            })
+
 
   }
 
   preparaCadastrar(event){
     event.preventDefault();
     this.cadastrando = true;
+    this.usuario = '';
+    this.senha = '';
+    this.errors = null;
   }
 
   cancelaCadastro(){
