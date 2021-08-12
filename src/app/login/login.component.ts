@@ -1,3 +1,5 @@
+import { Usuario } from './models/usuario';
+import { AutenticacaoService } from './../services/autenticacao.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
@@ -10,9 +12,11 @@ export class LoginComponent {
 
   usuario: string;
   senha: string;
-  loginError: boolean;
   cadastrando: boolean;
-  constructor(private router: Router) { }
+  mensagemSucesso: string;
+  errors: String[];
+
+  constructor(private router: Router, private autenticacaoService: AutenticacaoService) { }
 
   onSubmit(){
     this.router.navigate(['/home'])
@@ -26,6 +30,24 @@ export class LoginComponent {
 
   cancelaCadastro(){
     this.cadastrando = false;
+  }
+
+  cadastrarUsuario(){
+    const usuario: Usuario = new Usuario();
+    usuario.usuario = this.usuario;
+    usuario.senha = this.senha;
+
+    this.autenticacaoService.salvar(usuario)
+                            .subscribe(response => {
+                                this.mensagemSucesso = "Cadastro realizado com sucesso. Efetue o login";
+                                this.cadastrando = false;
+                                this.errors = null;
+                                this.usuario = "";
+                                this.senha = "";
+                            }, errorResponse => {
+                             this.mensagemSucesso = null;
+                             this.errors = errorResponse.error.errors;
+                            })
   }
 
 }
