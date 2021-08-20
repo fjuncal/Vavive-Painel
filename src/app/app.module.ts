@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ProfissionaisModule } from './profissionais/profissionais.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LayoutComponent } from './layout/layout.component';
     TemplateModule,
     ClientesModule,
     ServicoPrestadoModule,
+    ProfissionaisModule,
   ],
   providers: [
     ClientesService,
