@@ -16,6 +16,13 @@ export class ClientesListaComponent implements OnInit {
   mensagemSucesso: string;
   mensagemErro: string;
 
+  nome: string;
+  cpf: string;
+  origem: string;
+  dataInicio: string;
+  dataFim: string;
+  mensagemConsulta: string;
+
   constructor(private service: ClientesService, private router: Router) {
 
    }
@@ -42,6 +49,18 @@ export class ClientesListaComponent implements OnInit {
         },
         erro => this.mensagemSucesso = 'Ocorreu um erro ao deleter o cliente'
       )
+  }
+
+  consultarCliente(){
+    this.mensagemConsulta = 'Ola'
+    console.log(this.nome);
+    console.log(this.cpf);
+    console.log(this.origem);
+    console.log(this.dataInicio);
+    console.log(this.dataFim);
+
+
+
   }
 
 }
