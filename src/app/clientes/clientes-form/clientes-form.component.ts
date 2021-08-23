@@ -16,6 +16,7 @@ export class ClientesFormComponent implements OnInit {
   cliente: Cliente;
   success: boolean = false;
   errors: String[];
+  mensagemErroCEPInvalido: String;
 
 
   constructor(
@@ -73,15 +74,31 @@ export class ClientesFormComponent implements OnInit {
 
   preencherCep(event: any){
     let cep = event.target.value;
-    let requisicao = `https://viacep.com.br/ws/${cep}/json`
-    this.http.get<any>(requisicao).subscribe(response => {
-      this.cliente.endereco = response.logradouro;
-      this.cliente.bairro = response.bairro;
-      this.cliente.estado = response.uf;
-      this.cliente.municipio = response.localidade;
-      this.cliente.telefone = response.ddd;
-      console.log(response);
-    })
+
+      if(cep){
+      let validacep = /^[0-9]{8}$/;
+          if(validacep.test(cep)){
+        let requisicao = `https://viacep.com.br/ws/${cep}/json`
+
+        this.http.get<any>(requisicao).subscribe(response => {
+          this.cliente.endereco = response.logradouro;
+          this.cliente.bairro = response.bairro;
+          this.cliente.estado = response.uf;
+          this.cliente.municipio = response.localidade;
+          this.cliente.telefone = response.ddd;
+          if(response.erro == true){
+            this.mensagemErroCEPInvalido = 'CEP inválido, favor verificar'
+          } else{
+            this.mensagemErroCEPInvalido = null
+          }
+        })
+      } else{
+        this.mensagemErroCEPInvalido = 'CEP inválido, favor verificar'
+      }
+    } else {
+      this.mensagemErroCEPInvalido =  'CEP em branco'
+
+    }
   }
 
 }
