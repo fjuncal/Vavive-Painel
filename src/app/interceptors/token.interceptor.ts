@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     const url = request.url;
 
-    if(tokenString && !url.endsWith('/oauth/token')){
+    if(tokenString && !url.endsWith('/oauth/token') && !url.startsWith('https://viacep.com.br/')){
       const token = JSON.parse(tokenString);
       const jwt = token.access_token;
 
@@ -33,4 +33,12 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request);
   }
+
+  isHeaderNeeded(url: string) {
+    if (url === "other.api.com") { // this condition is up to you, it could be an exact match or how ever you like
+        return false;
+    } else {
+        return true;
+    }
+}
 }

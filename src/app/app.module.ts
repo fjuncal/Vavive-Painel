@@ -16,6 +16,7 @@ import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.modul
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ProfissionaisModule } from './profissionais/profissionais.module';
+import { ImportarPlanilhaModule } from './importar-planilha/importar-planilha.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ProfissionaisModule } from './profissionais/profissionais.module';
     ClientesModule,
     ServicoPrestadoModule,
     ProfissionaisModule,
+    ImportarPlanilhaModule,
   ],
   providers: [
     ClientesService,

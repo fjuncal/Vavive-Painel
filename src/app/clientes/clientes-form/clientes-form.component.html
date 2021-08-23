@@ -35,7 +35,7 @@
       <div class="col-md-2">
         <div class="form-group">
           <label>CEP: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep">
+          <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep" id="cep" (blur)="preencherCep($event)">
         </div>
       </div>
     </div>
@@ -43,25 +43,25 @@
       <div class="col-md-2">
         <div class="form-group">
           <label>Bairro: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.bairro" name="bairro">
+          <input type="text" class="form-control" [(ngModel)]="cliente.bairro" name="bairro" id="bairro">
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <label>Municipio: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.municipio" name="bairro">
+          <input type="text" class="form-control" [(ngModel)]="cliente.municipio" name="municipio" id="cidade">
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <label>Estado: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.estado" name="bairro">
+          <input type="text" class="form-control" [(ngModel)]="cliente.estado" name="estado" id="uf">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label>Endereço: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco">
+          <input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco" id="rua">
         </div>
       </div>
     </div>
@@ -119,3 +119,4 @@
         </button>
     </div>
   </form>
+

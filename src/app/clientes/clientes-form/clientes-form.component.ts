@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClientesService } from './../../services/clientes.service';
@@ -20,7 +21,8 @@ export class ClientesFormComponent implements OnInit {
   constructor(
     private service: ClientesService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private http: HttpClient
     ) {
       this.cliente = new Cliente();
    }
@@ -67,6 +69,19 @@ export class ClientesFormComponent implements OnInit {
   }
   voltarParaLista(){
     this.router.navigate(['/clientes/lista'])
+  }
+
+  preencherCep(event: any){
+    let cep = event.target.value;
+    let requisicao = `https://viacep.com.br/ws/${cep}/json`
+    this.http.get<any>(requisicao).subscribe(response => {
+      this.cliente.endereco = response.logradouro;
+      this.cliente.bairro = response.bairro;
+      this.cliente.estado = response.uf;
+      this.cliente.municipio = response.localidade;
+      this.cliente.telefone = response.ddd;
+      console.log(response);
+    })
   }
 
 }

@@ -1,0 +1,33 @@
+<h1 class="mt-4">Importar Planilha</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Importar Planilha</li>
+</ol>
+
+<div class="container">
+  <form #importarPlanilhaForm="ngForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <input id="file-upload" type="file" name="fileUpload" accept=".xls, .xlsx, .ods" (change)="fileUpload($event)">
+          <label for="file-upload" id="file-drag"></label>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success" (click)="enviar()">
+        Enviar
+      </button>
+    </div>
+  </form>
+
+
+  {{ converterParaJson }}
+</div>
+
+<table class="table table-condensed table-hover">
+  <tbody>
+    <tr *ngFor="let coluna of data">
+      <td *ngFor="let celula of coluna"> {{ celula }}</td>
+    </tr>
+  </tbody>
+</table>
