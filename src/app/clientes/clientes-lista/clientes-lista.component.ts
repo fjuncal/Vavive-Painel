@@ -1,3 +1,4 @@
+import { FiltroCliente } from './../models/filtro-cliente';
 import { ClientesService } from './../../services/clientes.service';
 import { Cliente } from './../models/cliente';
 import { Component, OnInit } from '@angular/core';
@@ -21,10 +22,13 @@ export class ClientesListaComponent implements OnInit {
   origem: string;
   dataInicio: string;
   dataFim: string;
+
+  filtroCliente: FiltroCliente;
+  clienteFiltrados: String[];
   mensagemConsulta: string;
 
   constructor(private service: ClientesService, private router: Router) {
-
+      this.filtroCliente = new FiltroCliente();
    }
 
 
@@ -52,14 +56,16 @@ export class ClientesListaComponent implements OnInit {
   }
 
   consultarCliente(){
+    console.log(this.filtroCliente);
+
+    this.service.getClientesFiltrados(this.filtroCliente).subscribe(response => {
+      this.clientes = response;
+      let numeroRegistro = response.length;
+      this.mensagemConsulta = `Foram encontrado(s) ${numeroRegistro} registros`
+      console.log(response);
+
+    })
     this.mensagemConsulta = 'Ola'
-    console.log(this.nome);
-    console.log(this.cpf);
-    console.log(this.origem);
-    console.log(this.dataInicio);
-    console.log(this.dataFim);
-
-
 
   }
 

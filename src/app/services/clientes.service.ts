@@ -1,6 +1,7 @@
+import { FiltroCliente } from './../clientes/models/filtro-cliente';
 import { Cliente } from './../clientes/models/cliente';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -27,6 +28,10 @@ export class ClientesService {
 
   getClienteById(id: number): Observable<Cliente>{
     return this.http.get<any>(`${this.apiURL}/${id}`)
+  }
+
+  getClientesFiltrados(filtroCliente: FiltroCliente): Observable<Cliente[]>{
+    return this.http.post<Cliente[]>(`${this.apiURL}/search`, filtroCliente);
   }
 
   deletar(cliente: Cliente): Observable<any>{
