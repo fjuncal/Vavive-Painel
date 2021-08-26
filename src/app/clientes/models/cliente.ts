@@ -12,5 +12,16 @@ export class Cliente{
   observacao: string;
   dataCadastro: string;
   pontoDeReferencia: string;
-  origemCliente:     string;
+  origemCliente: string;
+  complemento: string;
+
+  get enderecoCompleto(){
+   this.enderecoCompleto =  `${this.endereco} -  ${this.bairro}, ${this.municipio} - ${this.estado}, ${this.cep}`;
+   return this.enderecoCompleto;
+  }
+
+  set enderecoCompleto(enderecoCompleto: string){
+    this.enderecoCompleto = enderecoCompleto
+  }
+
 }

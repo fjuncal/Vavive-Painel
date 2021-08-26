@@ -35,38 +35,6 @@
           <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf">
         </div>
       </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>CEP: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep" id="cep" (blur)="preencherCep($event)" size="10" maxlength="9">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Bairro: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.bairro" name="bairro" id="bairro">
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Municipio: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.municipio" name="municipio" id="cidade">
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Estado: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.estado" name="estado" id="uf">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Endereço: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco" id="rua">
-        </div>
-      </div>
     </div>
     <div class="row">
       <div class="col-md-2">
@@ -77,18 +45,10 @@
       </div>
       <div class="col-md-5">
         <div class="form-group">
-          <label>Ponto de Referencia: </label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.pontoDeReferencia" name="pontoDeReferencia">
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="form-group">
           <label>Observação: </label>
           <input type="text" class="form-control" [(ngModel)]="cliente.observacao" name="observacao">
         </div>
       </div>
-    </div>
-    <div class="row">
       <div class="col-md-2">
         <div class="form-group">
           <label>Origem do Cliente: </label>
@@ -101,10 +61,61 @@
             </select>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-1" *ngIf="cliente.dataCadastro">
         <div class="form-group">
           <label>Data Cadastro: </label>
           <input type="text" class="form-control" disabled="true" [ngModel]="cliente.dataCadastro" name="dataCadastro" >
+        </div>
+      </div>
+    </div>
+    <hr>
+    <h3 style="text-align: center;">Endereço Cliente</h3>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>CEP: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep" id="cep" (blur)="preencherCep($event)" size="10" maxlength="9">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Endereço: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco" id="rua" disabled>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Complemento: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.complemento" name="complemento" id="complemento">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Municipio: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.municipio" name="municipio" id="cidade" disabled>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Estado: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.estado" name="estado" id="uf" disabled>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Bairro: *</label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.bairro" name="bairro" id="bairro" disabled>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Ponto de Referencia: </label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.pontoDeReferencia" name="pontoDeReferencia">
         </div>
       </div>
     </div>
