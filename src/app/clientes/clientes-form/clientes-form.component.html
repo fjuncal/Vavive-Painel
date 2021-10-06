@@ -35,20 +35,6 @@
           <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf">
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Telefone: *</label>
-          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone" name="telefone">
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="form-group">
-          <label>Observação: </label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.observacao" name="observacao">
-        </div>
-      </div>
       <div class="col-md-2">
         <div class="form-group">
           <label>Origem do Cliente: </label>
@@ -63,6 +49,42 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Telefone: *</label>
+          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone" name="telefone">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Telefone(2): *</label>
+          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone2" name="telefone2">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label>Telefone(3): *</label>
+          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone3" name="telefone3">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <label>Observação: </label>
+          <input type="text" class="form-control" [(ngModel)]="cliente.observacao" name="observacao">
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="form-group">
+          <label>Status: </label>
+           <select class="form-select form-control" [(ngModel)]="cliente.ativo" name="ativo">
+              <option selected></option>
+              <option value="true">Ativo</option>
+              <option value="false">Inativo</option>
+            </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-1" *ngIf="cliente.dataCadastro">
         <div class="form-group">
           <label>Data Cadastro: </label>
@@ -71,55 +93,67 @@
       </div>
     </div>
     <hr>
-    <h3 style="text-align: center;">Endereço Cliente</h3>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>CEP: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.cep" name="cep" id="cep" (blur)="preencherCep($event)" size="10" maxlength="9">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Endereço: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco" id="rua" disabled>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label>Complemento: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.complemento" name="complemento" id="complemento">
-        </div>
-      </div>
+    <div>
+         <h4 style="text-align: center; background-color: lightgray;">Endereço(s) <button class="btn btn-primary" type="button" (click)="addEndereco()">+</button></h4>
+    </div>
+    <div [formGroup]="enderecoForm">
+      <div formArrayName="enderecos">
+        <div *ngFor="let endereco of enderecos; let i = index" [formGroupName]='i'>
+          <h5 style="text-align: center;">Endereço({{ i + 1 }}) <button class="btn btn-danger" type="button" (click)=removerEndereco(i)>-</button> </h5>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>CEP: *</label>
+                <input type="text" class="form-control" name="cep" [(ngModel)]="cliente.enderecos[i].cep" (blur)="preencherCep($event, i)" size="10" maxlength="9" formControlName="cep">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Endereço: *</label>
+                <input type="text" class="form-control"  name="endereco" id="rua" formControlName="endereco">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Complemento: *</label>
+                <input type="text" class="form-control"  name="complemento" id="complemento" formControlName="complemento">
+              </div>
+            </div>
 
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Municipio: *</label>
+                <input type="text" class="form-control" name="municipio" id="cidade" formControlName="municipio">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Estado: *</label>
+                <input type="text" class="form-control" name="estado" id="uf" formControlName="estado">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Bairro: *</label>
+                <input type="text" class="form-control" name="bairro" id="bairro" formControlName="bairro">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Ponto de Referencia: </label>
+                <input type="text" class="form-control" name="pontoDeReferencia" formControlName="pontoDeReferencia">
+              </div>
+            </div>
+          </div>
+          <!-- <button class="btn btn-danger" type="button" (click)=removerEndereco(i)>-</button> -->
+          <hr>
+        </div>
+      </div>
+      <!-- <button class="btn btn-primary mb-2" type="button" (click)="addEndereco()">+</button> -->
     </div>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Municipio: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.municipio" name="municipio" id="cidade" disabled>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Estado: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.estado" name="estado" id="uf" disabled>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label>Bairro: *</label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.bairro" name="bairro" id="bairro" disabled>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Ponto de Referencia: </label>
-          <input type="text" class="form-control" [(ngModel)]="cliente.pontoDeReferencia" name="pontoDeReferencia">
-        </div>
-      </div>
-    </div>
-    <div class="row">
+      <div class="row">
       <div class="col-md-0">
         <button type="submit" class="btn btn-success ml-3" *ngIf="!cliente.id" >
           <i class="fa fa-save"></i> Salvar

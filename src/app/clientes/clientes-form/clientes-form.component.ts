@@ -1,10 +1,11 @@
+import { Endereco } from './../models/endereco';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ClientesService } from './../../services/clientes.service';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../models/cliente';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes-form',
@@ -18,14 +19,21 @@ export class ClientesFormComponent implements OnInit {
   errors: String[];
   mensagemErroCEPInvalido: String;
 
+  enderecoForm: FormGroup;
+
+  get enderecos(){
+    return (<FormArray>this.enderecoForm.get('enderecos')).controls
+  }
 
   constructor(
     private service: ClientesService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private fb: FormBuilder
     ) {
       this.cliente = new Cliente();
+      this.cliente.enderecos.push(new Endereco());
    }
 
   ngOnInit(): void {
@@ -42,8 +50,36 @@ export class ClientesFormComponent implements OnInit {
         }
     })
 
+    this.enderecoForm = this.fb.group({
+      enderecos: this.fb.array([])
+    });
+
+    this.addEndereco();
 
   }
+  removerEndereco(i){
+    (<FormArray>this.enderecoForm.get('enderecos')).removeAt(i);
+    this.cliente.enderecos.splice(i-1);
+  }
+
+
+  addEndereco(){
+    this.cliente.enderecos.push(new Endereco());
+    (<FormArray>this.enderecoForm.get('enderecos')).push(this.fb.group({
+      cep: [],
+      endereco: [],
+      complemento: [],
+      municipio: [],
+      estado: [],
+      bairo: [],
+      pontoDeReferencia: []
+    }))
+    // this.enderecos.push(this.fb.control(''));
+    // console.log(this.enderecos);
+    // console.log('control:', this.fb.control(''));
+
+
+    }
 
   enviar(){
     if(this.cliente.id){
@@ -72,7 +108,7 @@ export class ClientesFormComponent implements OnInit {
     this.router.navigate(['/clientes/lista'])
   }
 
-  preencherCep(event: any){
+  preencherCep(event: any, id: number){
     let cep = event.target.value;
 
       if(cep){
@@ -81,11 +117,11 @@ export class ClientesFormComponent implements OnInit {
         let requisicao = `https://viacep.com.br/ws/${cep}/json`
 
         this.http.get<any>(requisicao).subscribe(response => {
-          this.cliente.endereco = response.logradouro;
-          this.cliente.bairro = response.bairro;
-          this.cliente.estado = response.uf;
-          this.cliente.municipio = response.localidade;
-          this.cliente.telefone = response.ddd;
+          this.cliente.enderecos[id].logradouro = response.logradouro;
+          this.cliente.enderecos[id].bairro = response.bairro;
+          this.cliente.enderecos[id].estado = response.uf;
+          this.cliente.enderecos[id].municipio = response.localidade;
+          // this.cliente.enderecos[id].telefone = response.ddd;
           if(response.erro == true){
             this.mensagemErroCEPInvalido = 'CEP inválido, favor verificar'
           } else{
