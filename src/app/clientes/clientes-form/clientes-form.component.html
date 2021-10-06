@@ -57,23 +57,31 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <label>Telefone(2): *</label>
+          <label>Telefone(2):</label>
           <input type="tel" class="form-control" [(ngModel)]="cliente.telefone2" name="telefone2">
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <label>Telefone(3): *</label>
+          <label>Telefone(3):</label>
           <input type="tel" class="form-control" [(ngModel)]="cliente.telefone3" name="telefone3">
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="form-group">
           <label>Observação: </label>
           <input type="text" class="form-control" [(ngModel)]="cliente.observacao" name="observacao">
         </div>
       </div>
-      <div class="col-md-1">
+    </div>
+    <div class="row">
+      <div class="col-md-2" *ngIf="cliente.dataCadastro">
+        <div class="form-group">
+          <label>Data Cadastro: </label>
+          <input type="text" class="form-control" disabled="true" [ngModel]="cliente.dataCadastro" name="dataCadastro" >
+        </div>
+      </div>
+      <div class="col-md-2" *ngIf="cliente.id">
         <div class="form-group">
           <label>Status: </label>
            <select class="form-select form-control" [(ngModel)]="cliente.ativo" name="ativo">
@@ -81,14 +89,6 @@
               <option value="true">Ativo</option>
               <option value="false">Inativo</option>
             </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-1" *ngIf="cliente.dataCadastro">
-        <div class="form-group">
-          <label>Data Cadastro: </label>
-          <input type="text" class="form-control" disabled="true" [ngModel]="cliente.dataCadastro" name="dataCadastro" >
         </div>
       </div>
     </div>
@@ -110,40 +110,39 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Endereço: *</label>
-                <input type="text" class="form-control"  name="endereco" id="rua" formControlName="endereco">
+                <input type="text" class="form-control"  name="logradouro" [(ngModel)]="cliente.enderecos[i].logradouro" formControlName="logradouro">
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>Complemento: *</label>
-                <input type="text" class="form-control"  name="complemento" id="complemento" formControlName="complemento">
+                <input type="text" class="form-control"  name="complemento" [(ngModel)]="cliente.enderecos[i].complemento" formControlName="complemento">
               </div>
             </div>
-
           </div>
           <div class="row">
             <div class="col-md-2">
               <div class="form-group">
+                <label>Bairro: *</label>
+                <input type="text" class="form-control" name="bairro" [(ngModel)]="cliente.enderecos[i].bairro" formControlName="bairro">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
                 <label>Municipio: *</label>
-                <input type="text" class="form-control" name="municipio" id="cidade" formControlName="municipio">
+                <input type="text" class="form-control" name="municipio" [(ngModel)]="cliente.enderecos[i].municipio" formControlName="municipio">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Estado: *</label>
-                <input type="text" class="form-control" name="estado" id="uf" formControlName="estado">
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="form-group">
-                <label>Bairro: *</label>
-                <input type="text" class="form-control" name="bairro" id="bairro" formControlName="bairro">
+                <input type="text" class="form-control" name="estado" [(ngModel)]="cliente.enderecos[i].estado" formControlName="estado">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Ponto de Referencia: </label>
-                <input type="text" class="form-control" name="pontoDeReferencia" formControlName="pontoDeReferencia">
+                <input type="text" class="form-control" name="pontoDeReferencia" [(ngModel)]="cliente.enderecos[i].pontoDeReferencia" formControlName="pontoDeReferencia">
               </div>
             </div>
           </div>

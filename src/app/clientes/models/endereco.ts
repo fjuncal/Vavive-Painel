@@ -6,4 +6,5 @@ export class Endereco{
   municipio: string;
   estado: string;
   pontoDeReferencia: string;
+  enderecoCompleto: string;
 }

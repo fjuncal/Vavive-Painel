@@ -33,8 +33,7 @@ export class ClientesFormComponent implements OnInit {
     private fb: FormBuilder
     ) {
       this.cliente = new Cliente();
-      this.cliente.enderecos.push(new Endereco());
-   }
+    }
 
   ngOnInit(): void {
     let params: Observable<Params> = this.activatedRoute.params;
@@ -44,42 +43,52 @@ export class ClientesFormComponent implements OnInit {
           this.service
           .getClienteById(this.cliente.id)
             .subscribe(
-              response => this.cliente = response,
+              response => {
+                this.cliente = response;
+                this.inicializarEnderecoForm();
+              },
               errorResponse => this.cliente = new Cliente()
             )
         }
+
     })
 
     this.enderecoForm = this.fb.group({
       enderecos: this.fb.array([])
     });
-
-    this.addEndereco();
-
   }
+
+  inicializarEnderecoForm(){
+    let qtd = this.cliente.enderecos.length;
+
+    for (let index = 0; index < qtd; index++) {
+      this.addEnderecoForm();
+    }
+  }
+
   removerEndereco(i){
     (<FormArray>this.enderecoForm.get('enderecos')).removeAt(i);
     this.cliente.enderecos.splice(i-1);
+    // console.log(this.cliente.enderecos);
   }
-
 
   addEndereco(){
     this.cliente.enderecos.push(new Endereco());
+    this.addEnderecoForm();
+    // console.log(this.cliente.enderecos);
+  }
+
+  addEnderecoForm(){
     (<FormArray>this.enderecoForm.get('enderecos')).push(this.fb.group({
       cep: [],
-      endereco: [],
+      logradouro: [],
       complemento: [],
+      bairro: [],
       municipio: [],
       estado: [],
-      bairo: [],
       pontoDeReferencia: []
     }))
-    // this.enderecos.push(this.fb.control(''));
-    // console.log(this.enderecos);
-    // console.log('control:', this.fb.control(''));
-
-
-    }
+  }
 
   enviar(){
     if(this.cliente.id){
