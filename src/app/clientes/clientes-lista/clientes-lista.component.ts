@@ -27,15 +27,18 @@ export class ClientesListaComponent implements OnInit {
   clienteFiltrados: String[];
   mensagemConsulta: string;
 
+  page = 1;
+  count = 0;
+  tableSize = 7;
+  tableSizes = [3, 6, 9, 12];
+
   constructor(private service: ClientesService, private router: Router) {
       this.filtroCliente = new FiltroCliente();
    }
 
 
   ngOnInit(): void {
-    this.service.getClientes().subscribe(resposta => {
-      this.clientes = resposta
-    });
+    this.fetchClientes();
   }
 
   novoCadastro(){
@@ -67,8 +70,22 @@ export class ClientesListaComponent implements OnInit {
       console.log(response);
 
     })
-    this.mensagemConsulta = 'Ola'
+  }
 
+  fetchClientes(): void{
+    this.service.getClientes().subscribe(resposta => {
+      this.clientes = resposta
+    });
+  }
+  onTableSizeChange(event): void{
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.fetchClientes();
+  }
+
+  onTableDataChange(event){
+    this.page = event;
+    this.fetchClientes();
   }
 
 }

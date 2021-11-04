@@ -34,7 +34,7 @@
             <button type="button" (click) = "novoCadastro()" class="btn btn-warning ml-1">
               <i class="fa fa-plus"></i> Novo
             </button>
-          
+
           </div>
           <div class="alert alert-warning" role="alert" *ngIf=" mensagemConsulta">
             {{ mensagemConsulta }}
@@ -55,6 +55,15 @@
   <br />
   <div class="row">
     <div class="col-md-12">
+      <div class="d-flex flex-row-reverse bd-highlight mb-2">
+        <div class="p-2 bd-highlight">
+          <select (change)="onTableSizeChange($event)" class="custom-select">
+            <option *ngFor="let size of tableSizes" [ngValue]="size">
+              {{ size }}
+            </option>
+          </select>
+        </div>
+      </div>
       <table class="table table-condensed table-hover">
         <thead>
           <tr>
@@ -70,7 +79,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cliente of clientes">
+          <tr *ngFor="let cliente of clientes | paginate : {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+          };let i = index">
             <td> {{ cliente.id }}</td>
             <td> {{ cliente.nome }}</td>
             <td> {{ cliente.email }}</td>
@@ -78,7 +91,7 @@
             <td> {{ cliente.telefone }}</td>
             <td> {{ cliente.telefone2 }}</td>
             <td> {{ cliente.telefone3 }}</td>
-            <td> 
+            <td>
                 <p *ngFor="let endereco of cliente.enderecos">
                   {{endereco.enderecoCompleto}}
                   <!-- {{ endereco.logradouro + ' ' + endereco.complemento + ' - ' + endereco.bairro}}  -->
@@ -97,6 +110,13 @@
           </tr>
         </tbody>
       </table>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+      </div>
     </div>
   </div>
 
