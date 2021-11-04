@@ -34,6 +34,9 @@ export class TrocarSenhaComponent implements OnInit {
     } else{
         this.usuarioService.atualizarSenha(this.trocarSenha).subscribe(resp => {
           this.success = true;
+          this.trocarSenha.senhaAtual = ''
+          this.trocarSenha.senhaNova = ''
+          this.trocarSenha.senhaNova2 = ''
         }, errorResponse => {
           this.error = true;
           this.mensagemErro = 'Erro na Requisição';
