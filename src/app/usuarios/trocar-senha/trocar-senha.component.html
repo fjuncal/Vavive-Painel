@@ -1,0 +1,46 @@
+<h1 class="mt-4">Trocar Senha</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Nova senha</li>
+</ol>
+  <form (ngSubmit)="atualizarSenha()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success === true">
+          Senha Atualizada com Sucesso
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error === true">
+          {{ mensagemErro }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Senha Atual: </label>
+          <input type="password" [(ngModel)]="trocarSenha.senhaAtual" class="form-control"  name="senhaAtual">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Nova Senha: </label>
+          <input type="password" [(ngModel)]="trocarSenha.senhaNova" class="form-control" name="novaSenha1">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Confirmar Nova Senha: </label>
+          <input type="password" class="form-control" [(ngModel)]="trocarSenha.senhaNova2"  name="novaSenha2">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      <i class="fa fa-sync-alt"></i> Atualizar
+    </button>
+
+  </form>

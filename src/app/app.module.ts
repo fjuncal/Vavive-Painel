@@ -1,3 +1,5 @@
+import { UsuariosService } from './services/usuarios.service';
+import { UsuariosModule } from './usuarios/usuarios.module';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AutenticacaoService } from './services/autenticacao.service';
 import { FormsModule } from '@angular/forms';
@@ -35,11 +37,13 @@ import { ImportarPlanilhaModule } from './importar-planilha/importar-planilha.mo
     ServicoPrestadoModule,
     ProfissionaisModule,
     ImportarPlanilhaModule,
+    UsuariosModule
   ],
   providers: [
     ClientesService,
     ServicoPrestadoService,
     AutenticacaoService,
+    UsuariosService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
