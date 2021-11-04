@@ -38,7 +38,7 @@ export class ClientesService {
     return this.http.delete<any>(`${this.apiURL}/${cliente.id}`);
   }
 
-  importarPlanilha(file): Observable<HttpEvent<any>>{
+  importarPlanilha(file: File): Observable<HttpEvent<any>>{
     const formData = new FormData();
     formData.append("arquivo",file);
     const req = new HttpRequest("POST", this.apiURL + '/importar', formData);

@@ -10,8 +10,7 @@ import * as XLSX from 'xlsx';
 export class ImportarPlanilhaListaComponent implements OnInit {
 
   data: [][];
-  arquivo: File;
-  arquivoSelecionado: any;
+  arquivoSelecionado: File;
   constructor(private service: ClientesService, private router: Router) {
 
    }
@@ -29,13 +28,13 @@ export class ImportarPlanilhaListaComponent implements OnInit {
      fileReader.onload = (event) => {
         let binaryData = event.target.result;
         let workbook = XLSX.read(binaryData, {type: 'binary'});
-        console.log(workbook);
+//        console.log(workbook);
 
         workbook.SheetNames.forEach(sheet => {
          this.data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet], {header: 1});
-          console.log(this.data);
+//          console.log(this.data);
           this.converterParaJson = JSON.stringify(this.data, undefined, 4);
-          console.log(this.data);
+//          console.log(this.data);
 
 
         })
@@ -45,7 +44,7 @@ export class ImportarPlanilhaListaComponent implements OnInit {
 
   enviar(){
     this.service.importarPlanilha(this.arquivoSelecionado).subscribe( resp => {
-      console.log(resp);
+      //console.log(resp);
 
     });
 
