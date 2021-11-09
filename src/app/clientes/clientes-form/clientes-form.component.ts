@@ -131,7 +131,7 @@ export class ClientesFormComponent implements OnInit {
           this.cliente.enderecos[id].estado = response.uf;
           this.cliente.enderecos[id].municipio = response.localidade;
           // this.cliente.enderecos[id].telefone = response.ddd;
-          if(response.erro == true){
+          if(response.erro == true && cep != null){
             this.mensagemErroCEPInvalido = 'CEP inválido, favor verificar'
           } else{
             this.mensagemErroCEPInvalido = null
@@ -141,7 +141,7 @@ export class ClientesFormComponent implements OnInit {
         this.mensagemErroCEPInvalido = 'CEP inválido, favor verificar'
       }
     } else {
-      this.mensagemErroCEPInvalido =  'CEP em branco'
+      //this.mensagemErroCEPInvalido =  'CEP em branco'
 
     }
   }

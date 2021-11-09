@@ -69,11 +69,8 @@
           <tr>
             <th>Id</th>
             <th>Nome</th>
-            <th>E-Mail</th>
             <th>Cpf</th>
             <th>Telefone</th>
-            <th>Telefone 2</th>
-            <th>Telefone 3</th>
             <th>Endereço</th>
             <th></th>
           </tr>
@@ -86,11 +83,11 @@
           };let i = index">
             <td> {{ cliente.id }}</td>
             <td> {{ cliente.nome }}</td>
-            <td> {{ cliente.email }}</td>
             <td> {{ cliente.cpf }}</td>
-            <td> {{ cliente.telefone }}</td>
-            <td> {{ cliente.telefone2 }}</td>
-            <td> {{ cliente.telefone3 }}</td>
+            <td > <p>{{ cliente.telefone }}</p>
+                 <p>{{ cliente.telefone2 }}</p>
+                 <p>{{ cliente.telefone3 }}</p></td>
+
             <td>
                 <p *ngFor="let endereco of cliente.enderecos">
                   {{endereco.enderecoCompleto}}
