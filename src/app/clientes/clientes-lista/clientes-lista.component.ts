@@ -67,15 +67,17 @@ export class ClientesListaComponent implements OnInit {
       this.clientes = response;
       let numeroRegistro = response.length;
       this.mensagemConsulta = `Foram encontrado(s) ${numeroRegistro} registros`
-      console.log(response);
-
     })
   }
 
   fetchClientes(): void{
-    this.service.getClientes().subscribe(resposta => {
-      this.clientes = resposta
-    });
+    if(this.filtroCliente){
+      this.consultarCliente();
+    } else {
+      this.service.getClientes().subscribe(resposta => {
+        this.clientes = resposta
+      });
+  }
   }
   onTableSizeChange(event): void{
     this.tableSize = event.target.value;

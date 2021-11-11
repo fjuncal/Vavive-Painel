@@ -3,7 +3,7 @@
     <li class="breadcrumb-item active">Importar Planilha</li>
 </ol>
 
-<div class="container">
+<div class="container" style="text-align: center;">
   <form #importarPlanilhaForm="ngForm">
     <div class="row">
       <div class="col-md-12">
@@ -17,10 +17,39 @@
       <button type="submit" class="btn btn-success" (click)="enviar()">
         Enviar
       </button>
+      <h6>{{ listaBody }}</h6>
     </div>
   </form>
 
 </div>
+
+<div class="container">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Entidade</th>
+        <th scope="col">Linhas lidas</th>
+        <th scope="col">Linhas lidas com erro</th>
+        <th scope="col">Linhas lidas sem erro</th>
+        <th scope="col">Registros atualizados</th>
+        <th scope="col">Registros novos</th>
+        <th scope="col">Registros repetidos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="table-dark">{{ resultadoPlanilha.entidade }}</td>
+        <td class="table-warning">{{ resultadoPlanilha.quantidadeLinhasLidas }}</td>
+        <td class="table-danger">{{ resultadoPlanilha.quantidadeLinhasLidasComErro }}</td>
+        <td class="table-success">{{ resultadoPlanilha.quantidadeLinhasLidasSemErro }}</td>
+        <td class="table-success">{{ resultadoPlanilha.quantidadeRegistrosAtualizados }}</td>
+        <td class="table-success">{{ resultadoPlanilha.quantidadeRegistrosNovos }}</td>
+        <td class="table-warning">{{ resultadoPlanilha.quantidadeRegistrosRepetidos }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 <!-- <table class="table table-condensed table-hover">
   <tbody>

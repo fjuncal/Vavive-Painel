@@ -1,7 +1,7 @@
 import { FiltroCliente } from './../clientes/models/filtro-cliente';
 import { Cliente } from './../clientes/models/cliente';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -38,12 +38,12 @@ export class ClientesService {
     return this.http.delete<any>(`${this.apiURL}/${cliente.id}`);
   }
 
-  importarPlanilha(file: File): Observable<HttpEvent<any>>{
+  importarPlanilha(file: File): Observable<HttpResponse<any>>{
     const formData = new FormData();
     formData.append("arquivo",file);
     const req = new HttpRequest("POST", this.apiURL + '/importar', formData);
-    return this.http.request(req);
-    // return this.http.post<any>(`${this.apiURL}/importar`, file);
+    //return this.http.request(req);
+    return this.http.post<any>(`${this.apiURL}/importar`, formData);
   }
 
 }

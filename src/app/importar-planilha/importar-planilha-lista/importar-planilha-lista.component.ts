@@ -1,3 +1,4 @@
+import { ResultadoPlanilha } from './../models/resultado-planilha';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientesService } from 'src/app/services/clientes.service';
@@ -11,6 +12,8 @@ export class ImportarPlanilhaListaComponent implements OnInit {
 
   data: [][];
   arquivoSelecionado: File;
+  listaBody: any
+  resultadoPlanilha: ResultadoPlanilha;
   constructor(private service: ClientesService, private router: Router) {
 
    }
@@ -18,6 +21,7 @@ export class ImportarPlanilhaListaComponent implements OnInit {
   converterParaJson: string;
 
   ngOnInit(): void {
+    this.resultadoPlanilha = new ResultadoPlanilha();
   }
 
   fileUpload(event: any){
@@ -43,11 +47,17 @@ export class ImportarPlanilhaListaComponent implements OnInit {
  */  }
 
   enviar(){
-    this.service.importarPlanilha(this.arquivoSelecionado).subscribe( resp => {
-      //console.log(resp);
-
+    this.service.importarPlanilha(this.arquivoSelecionado).subscribe(resp  =>{
+      this.resultadoPlanilha.entidade = resp["entidade"];
+      this.resultadoPlanilha.erros = resp["erros"];
+      this.resultadoPlanilha.quantidadeLinhasLidas = resp["quantidadeLinhasLidas"];
+      this.resultadoPlanilha.quantidadeLinhasLidasComErro = resp["quantidadeLinhasLidasComErro"];
+      this.resultadoPlanilha.quantidadeLinhasLidasSemErro = resp["quantidadeLinhasLidasSemErro"];
+      this.resultadoPlanilha.quantidadeRegistrosAtualizados = resp["quantidadeRegistrosAtualizados"];
+      this.resultadoPlanilha.quantidadeRegistrosNovos = resp["quantidadeRegistrosNovos"];
+      this.resultadoPlanilha.quantidadeRegistrosRepetidos = resp["quantidadeRegistrosRepetidos"];
+      console.log(this.resultadoPlanilha);
     });
-
   }
 
 }
