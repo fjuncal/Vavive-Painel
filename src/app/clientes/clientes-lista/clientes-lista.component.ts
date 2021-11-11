@@ -29,8 +29,8 @@ export class ClientesListaComponent implements OnInit {
 
   page = 1;
   count = 0;
-  tableSize = 7;
-  tableSizes = [3, 6, 9, 12];
+  tableSize = 5;
+  tableSizes = [3, 5, 10, 20];
 
   constructor(private service: ClientesService, private router: Router) {
       this.filtroCliente = new FiltroCliente();

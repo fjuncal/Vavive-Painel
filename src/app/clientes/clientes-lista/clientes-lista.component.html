@@ -58,7 +58,7 @@
       <div class="d-flex flex-row-reverse bd-highlight mb-2">
         <div class="p-2 bd-highlight">
           <select (change)="onTableSizeChange($event)" class="custom-select">
-            <option *ngFor="let size of tableSizes" [ngValue]="size">
+            <option *ngFor="let size of tableSizes" [ngValue]="size" [selected]="size === tableSize">
               {{ size }}
             </option>
           </select>
