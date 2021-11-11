@@ -84,9 +84,9 @@
             <td> {{ cliente.id }}</td>
             <td> {{ cliente.nome }}</td>
             <td> {{ cliente.cpf }}</td>
-            <td > <p>{{ cliente.telefone | mask: '(00) 00000-0000' }}</p>
-                 <p>{{ cliente.telefone2 | mask: '(00) 00000-0000' }}</p>
-                 <p>{{ cliente.telefone3 | mask: '(00) 00000-0000' }}</p></td>
+            <td > <p>{{ cliente.telefone }}</p>
+                 <p>{{ cliente.telefone2 }}</p>
+                 <p>{{ cliente.telefone3 }}</p></td>
 
             <td>
                 <p *ngFor="let endereco of cliente.enderecos">

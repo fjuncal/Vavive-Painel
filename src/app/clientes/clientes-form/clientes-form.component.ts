@@ -118,7 +118,8 @@ export class ClientesFormComponent implements OnInit {
   }
 
   preencherCep(event: any, id: number){
-    let cep = event.target.value;
+    let valor = event.target.value;
+    var cep = valor.replace(/\D/g, '');
 
       if(cep){
       let validacep = /^[0-9]{8}$/;

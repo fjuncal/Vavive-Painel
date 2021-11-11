@@ -52,7 +52,7 @@
       <div class="col-md-2">
         <div class="form-group">
           <label>Telefone: *</label>
-          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone" name="telefone" prefix="+55" mask="(00) 00000-0000">
+          <input type="tel" class="form-control" [(ngModel)]="cliente.telefone" name="telefone" prefix="+55" mask="(00) 0000-0000||(00) 00000-0000">
         </div>
       </div>
       <div class="col-md-2">
@@ -115,7 +115,7 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label>Complemento: *</label>
+                <label>Complemento: </label>
                 <input type="text" class="form-control"  name="complemento" [(ngModel)]="cliente.enderecos[i].complemento" formControlName="complemento">
               </div>
             </div>
