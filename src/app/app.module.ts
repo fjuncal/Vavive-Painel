@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ProfissionaisModule } from './profissionais/profissionais.module';
 import { ImportarPlanilhaModule } from './importar-planilha/importar-planilha.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,10 @@ import { ImportarPlanilhaModule } from './importar-planilha/importar-planilha.mo
     ServicoPrestadoModule,
     ProfissionaisModule,
     ImportarPlanilhaModule,
-    UsuariosModule
+    UsuariosModule,
+    NgxMaskModule.forRoot({
+        dropSpecialCharacters: false
+    }),
   ],
   providers: [
     ClientesService,
