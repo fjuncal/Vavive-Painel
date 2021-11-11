@@ -22,7 +22,7 @@ export class ImportarPlanilhaListaComponent implements OnInit {
 
   fileUpload(event: any){
      this.arquivoSelecionado = event.target.files[0];
-     const fileReader = new FileReader();
+/*      const fileReader = new FileReader();
 
      fileReader.readAsBinaryString(this.arquivoSelecionado);
      fileReader.onload = (event) => {
@@ -40,7 +40,7 @@ export class ImportarPlanilhaListaComponent implements OnInit {
         })
 
      }
-  }
+ */  }
 
   enviar(){
     this.service.importarPlanilha(this.arquivoSelecionado).subscribe( resp => {
