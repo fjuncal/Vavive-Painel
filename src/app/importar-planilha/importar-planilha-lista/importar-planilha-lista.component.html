@@ -2,12 +2,20 @@
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Importar Planilha</li>
 </ol>
-
 <div class="container" style="text-align: center;">
   <form #importarPlanilhaForm="ngForm">
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
+
+          <h3 class="mb-4" *ngIf="mensagemImportacao" style="color:darkblue;">{{ mensagemImportacao }}</h3>
+
+          <select class="form-select form-control mb-3" [(ngModel)]="entidadeASerImportada" name="entidadeASerImportada">
+            <option selected>Escolha a entidade de importação</option>
+            <option value="clienteSelect">Cliente</option>
+            <option value="profissionalSelect">Profissional</option>
+          </select>
+
           <input id="file-upload" type="file" name="fileUpload" accept=".xls, .xlsx, .ods" (change)="fileUpload($event)">
           <label for="file-upload" id="file-drag"></label>
         </div>

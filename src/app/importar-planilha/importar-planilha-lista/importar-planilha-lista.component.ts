@@ -1,3 +1,4 @@
+import { ProfissionaisService } from './../../services/profissionais.service';
 import { ResultadoPlanilha } from './../models/resultado-planilha';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,7 +15,10 @@ export class ImportarPlanilhaListaComponent implements OnInit {
   arquivoSelecionado: File;
   listaBody: any
   resultadoPlanilha: ResultadoPlanilha;
-  constructor(private service: ClientesService, private router: Router) {
+  entidadeASerImportada: string;
+  mensagemImportacao: string;
+
+  constructor(private clienteService: ClientesService, private router: Router, private profissionaisService: ProfissionaisService) {
 
    }
 
@@ -23,6 +27,8 @@ export class ImportarPlanilhaListaComponent implements OnInit {
   ngOnInit(): void {
     this.resultadoPlanilha = new ResultadoPlanilha();
   }
+
+
 
   fileUpload(event: any){
      this.arquivoSelecionado = event.target.files[0];
@@ -47,7 +53,8 @@ export class ImportarPlanilhaListaComponent implements OnInit {
  */  }
 
   enviar(){
-    this.service.importarPlanilha(this.arquivoSelecionado).subscribe(resp  =>{
+    if(this.entidadeASerImportada == "clienteSelect"){
+      this.clienteService.importarPlanilha(this.arquivoSelecionado).subscribe(resp  =>{
       this.resultadoPlanilha.entidade = resp["entidade"];
       this.resultadoPlanilha.erros = resp["erros"];
       this.resultadoPlanilha.quantidadeLinhasLidas = resp["quantidadeLinhasLidas"];
@@ -56,8 +63,28 @@ export class ImportarPlanilhaListaComponent implements OnInit {
       this.resultadoPlanilha.quantidadeRegistrosAtualizados = resp["quantidadeRegistrosAtualizados"];
       this.resultadoPlanilha.quantidadeRegistrosNovos = resp["quantidadeRegistrosNovos"];
       this.resultadoPlanilha.quantidadeRegistrosRepetidos = resp["quantidadeRegistrosRepetidos"];
-      console.log(this.resultadoPlanilha);
-    });
+      this.mensagemImportacao = "Cliente Importado com sucesso"
+     }, err => {
+      this.mensagemImportacao = "Erro ao importar"
+     });
+    } else if (this.entidadeASerImportada == "profissionalSelect"){
+      this.profissionaisService.importarPlanilha(this.arquivoSelecionado).subscribe(resp => {
+      this.resultadoPlanilha.entidade = resp["entidade"];
+      this.resultadoPlanilha.erros = resp["erros"];
+      this.resultadoPlanilha.quantidadeLinhasLidas = resp["quantidadeLinhasLidas"];
+      this.resultadoPlanilha.quantidadeLinhasLidasComErro = resp["quantidadeLinhasLidasComErro"];
+      this.resultadoPlanilha.quantidadeLinhasLidasSemErro = resp["quantidadeLinhasLidasSemErro"];
+      this.resultadoPlanilha.quantidadeRegistrosAtualizados = resp["quantidadeRegistrosAtualizados"];
+      this.resultadoPlanilha.quantidadeRegistrosNovos = resp["quantidadeRegistrosNovos"];
+      this.resultadoPlanilha.quantidadeRegistrosRepetidos = resp["quantidadeRegistrosRepetidos"];
+      this.mensagemImportacao = "Profissional Importado com sucesso"
+      }, err => {
+        this.mensagemImportacao = "Erro ao importar"
+      })
+
+    } else {
+      this.mensagemImportacao = "opção inválida"
+    }
   }
 
 }
